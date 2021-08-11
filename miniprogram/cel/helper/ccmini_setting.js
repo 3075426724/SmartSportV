@@ -9,7 +9,7 @@
 
   	PROJECT_MARK: 'cel',
   	PROJECT_COLOR: '#C6000E',
-  	PROJECT_SWITCH: ['index_home', 'user_index', 'my_index', 'news_board'],
+  	PROJECT_SWITCH: ['index_home', 'user_index', 'my_index', 'news_board', 'face_index'],
   	PROJECT_IS_SUB: false, // 分包
   	PROJECT_NAME: 'CC校庆小程序',
   	PROJECT_VER: 'CCCel-Cli(V1.3 Build20210810)', //升级必须，请勿修改
