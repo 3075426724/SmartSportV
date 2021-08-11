@@ -1,0 +1,22 @@
+@import "comm/comm.wxss"; 
+@import "project/project.wxss";  
+
+.color-skin1 {
+	color: #C6000E !important;
+}
+
+.bg-skin1,
+.after-skin1:after {
+	background-color: #C6000E !important;
+	color: #fff !important;
+}
+
+
+.btn.bg-skin1  { 
+	color: #F5E5A1 !important;
+}
+
+.border-skin1 {
+	border-color: #C6000E !important;
+}
+ 

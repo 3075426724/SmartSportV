@@ -1,0 +1,7 @@
+{
+	"usingComponents": {
+	 
+	},
+	"enablePullDownRefresh": true,
+	"navigationBarTitleText": "致校友的一封信"
+  }
