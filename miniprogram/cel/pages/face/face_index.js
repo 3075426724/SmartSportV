@@ -2,6 +2,7 @@ import Poster from '../../ccmini-cmpts/lib/wxa-plugin-canvas/poster/poster.js'
 const ccminiPageHelper = require('../../helper/ccmini_page_helper.js');
 const ccminiHelper = require('../../helper/ccmini_helper.js');
 const RegBiz = require('../../biz/reg_biz.js');
+const PassportBiz = require('../../biz/passport_biz.js');
 
 Page({
 
@@ -20,6 +21,7 @@ Page({
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: async function (options) {
+		await PassportBiz.initPage(this);
 		//await this.catchCreatePosterTap();
 	},
 
