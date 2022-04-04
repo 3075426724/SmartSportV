@@ -1,0 +1,8 @@
+{
+	"usingComponents": { 
+	 
+	},
+	"navigationStyle": "custom",
+	"enablePullDownRefresh": true,
+	"navigationBarTitleText": "我的"
+}
