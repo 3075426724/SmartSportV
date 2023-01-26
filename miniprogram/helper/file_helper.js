@@ -1,5 +1,5 @@
 /**
- * Notes: 文件处理相关函数
+ * Notes: 文件 处理相关函数
  * Ver : CCMiniCloud Framework 2.0.1 ALL RIGHTS RESERVED BY cclinux@qq.com
  * Date: 2022-02-05 04:00:00 
  */
