@@ -1,7 +1,7 @@
  /**
   * Notes: 字符相关操作函数
   * Ver : CCMiniCloud Framework 2.0.1 ALL RIGHTS RESERVED BY cclinux@qq.com
-  * Date: 2020-09-05 04:00:00 
+  * Date: 2022-09-05 04:00:00 
   */
 
 
