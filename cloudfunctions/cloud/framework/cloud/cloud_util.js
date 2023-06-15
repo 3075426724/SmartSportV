@@ -1,7 +1,7 @@
 /**
  * Notes: 云基本操作模块
  * Ver : CCMiniCloud Framework 2.0.1 ALL RIGHTS RESERVED BY cclinux0730 (wechat)
- * Date: 2020-09-05 04:00:00 
+ * Date: 2022-09-05 04:00:00 
  */
 const cloudBase = require('./cloud_base.js');
 
