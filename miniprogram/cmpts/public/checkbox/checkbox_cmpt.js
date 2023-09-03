@@ -5,7 +5,7 @@
  	 * 组件的属性列表
  	 */
  	properties: {
- 		sourceData: { //源数组 
+ 		sourceData: { // 源数组 
  			type: Array,
  			value: [],
  		},
