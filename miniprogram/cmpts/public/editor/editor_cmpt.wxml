@@ -1,5 +1,5 @@
 <view class="editor-tab" wx:if="{{viewMode}}">
-	<button catchtap="url" data-type="bool" data-url="isView" class="btn round {{!isView?'bg-blue':'bg-grey light'}}  margin-right-xs">编辑</button>
+	<button catchtap="url" data-type="bool" data-url="isView" class="btn round {{!isView?'bg-blue':'bg-grey light'}}  margin-right-xs">编辑 /button>
 	<button catchtap="url" data-type="bool" data-url="isView" class="btn {{isView?'bg-blue':'bg-grey light'}} round">预览</button>
 </view>
 
