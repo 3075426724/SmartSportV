@@ -1,5 +1,5 @@
 /**
- * Notes: 云初始化实例
+ * Notes: 云初始化实 例
  * Ver : CCMiniCloud Framework 2.0.1 ALL RIGHTS RESERVED BY cclinux0730 (wechat)
  * Date: 2020-09-05 04:00:00 
  */
