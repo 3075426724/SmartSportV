@@ -1,0 +1,70 @@
+<scroll-view scrollX scrollY showScrollbar="{{false}}" class="move-area" bounces="{{false}}" enhanced="{{true}}">
+	<view class="move-view">
+		<view class="table-title">
+			<view class="item" wx:for="{{columns}}" wx:key="k">{{item.label}}</view>
+		</view>
+		<view class="time-table">
+
+			<view class="left-list">
+				<view wx:for="{{columns[0].times}}" wx:key="key" class="left {{item.title?'':'top'}}"><text class="{{item.title?'x-top':''}}">{{item.title }}</text></view>
+			</view>
+
+			<view class="right-list">
+				<view class="right-inner" wx:for="{{columns}}" wx:key="kk" wx:for-item="cols" wx:for-index="columnIdx">
+					<view bindtap="bindSelectTap" wx:for="{{cols.times}}" wx:key="key" data-idx="{{index}}" data-columnidx="{{columnIdx}}" class="right {{mode=='48'?'border':''}} {{item.selected?'selected':''}}  {{item.start==selectedStart?'selected-first1':''}}  {{item.error||(item.used&&showDetail=='no')?'error':''}} {{(showDetail=='detail'||showDetail=='line')&&item.used?'used':''}}  {{(showDetail=='detail'&&item.usedFirst)||(showDetail=='line'&&item.used)?'used-first':''}} text-cut">{{item.error&&!item.used?item.error:''}}{{item.used?item.usedText:''}} {{isPrice&&!item.error&&!item.used?item.price+'元':''}} {{!isPrice&&!item.error&&!item.used?'可预订':''}}</view>
+				</view>
+
+			</view>
+		</view>
+	</view>
+</scroll-view>
+<block>
+	<view bindtap="bindSumbitTap" wx:if="{{selectedStart&&selectedEnd&&selectedEndPoint}}" class="time-submit safe-bottom ">
+		<view class="inner confirm"><text wx:if="{{isAdmin}}" class="margin-right-xxs text-white">[代预订]</text>预订确认：{{selectedStart}}-{{selectedEndPoint}}<block wx:if="{{isPrice}}">，总费用 ¥{{price}}</block>
+		</view>
+	</view>
+	<view wx:else class="time-submit safe-bottom ">
+		<view class="inner bg-grey light"><text wx:if="{{isAdmin}}" class="margin-right-xxs text-blue">[代预订]</text>未选择预订时段</view>
+	</view>
+</block>
+
+<cmpt-modal wx:if="{{detailModalShow}}" model:show="{{detailModalShow}}" type="dialog" title="预订详情" bind:click="bindCancelCmpt" class="modal-form" cancelText="返回" confirmText="取消此预订">
+	<view class="form-group" style="padding:0 10rpx" wx:for="{{apptData.forms.list}}" wx:key="key">
+		<view class="left">{{item.title}} ：</view>
+		<view class="right">{{item.val}}</view>
+	</view>
+	<view class="form-group" style="padding:0 10rpx">
+		<view class="left">状态 ：</view>
+		<view class="right">
+			<view wx:if="{{apptData.forms.status==9}}" class="text-orange"><text class="icon-close margin-right-xxs"></text>用户取消
+			</view>
+			<view wx:elif="{{(apptData.forms.status==0||apptData.forms.status==1)&&apptData.forms.payStatus==0}}" class="text-orange"><text class="icon-warn margin-right-xxs"></text>待缴费</view>
+			<view wx:elif="{{apptData.forms.status==1&&(apptData.forms.payStatus==1||apptData.forms.payStatus==99)}}" class="text-green"><text class="icon-roundcheck margin-right-xxs"></text>成功	<text class="text-{{apptData.isCheckin==1?'green':'grey'}}">{{apptData.isCheckin==1?'，已核销':'，未核销'}}</text>
+			</view>
+			<view wx:elif="{{apptData.forms.status==99}}" class="text-red"><text class="icon-roundclose margin-right-xxs"></text>系统取消</view>
+			<view wx:else><text class="icon-warn margin-right-xxs"></text>状态异常</view>
+
+			 
+		</view>
+	</view>
+	<view class="form-group" style="padding:0 10rpx">
+		<view class="left">时间 ：</view>
+		<view class="right">{{apptData.forms.time}}</view>
+	</view>
+	<view class="form-group" style="padding:0 10rpx">
+		<view class="left">场地：</view>
+		<view class="right">{{apptData.forms.address}}</view>
+	</view>
+	<view class="form-group" style="padding:0 10rpx">
+		<view class="left">支付：</view>
+		<view class="right">{{apptData.forms.fee}}元</view>
+	</view>
+	<view class="form-group" style="padding:0 10rpx" wx:if="{{apptData.forms.status==1&&(apptData.forms.payStatus==1||apptData.forms.payStatus==99)}}">
+		<view class="left">核销操作 ：</view>
+		<view class="right" data-val="{{apptData.isCheckin}}" bindtap="bindCheckinTap">
+			<view wx:if="{{apptData.isCheckin==0}}" class="btn mid radius bg-green"><text class="icon-check"></text>核销本预订</view>
+			<view wx:else class="btn mid radius bg-red"><text class="icon-check"></text>取消核销</view>
+		</view>
+	</view>
+
+</cmpt-modal>

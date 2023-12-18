@@ -1,0 +1,21 @@
+<view wx:if="{{isLoad===null}}" class="margin-top load notexist text-l text-grey"></view>
+<view wx:if="{{isLoad===false}}" class="margin-top load loading text-l text-grey"></view>
+
+<!-- List Begin -->
+<view class="main-admin" wx:if="{{isAdmin&&isLoad}}">
+	<view class="admin-comm-list">
+		<view class="item" wx:for="{{list}}" wx:key="key" bindtap="url" data-url="../../setup/about/admin_setup_about?key=RULES{{item.val}}&title={{item.titleEn}}">
+			<view class="header">
+				<view class="left text-cut">《{{item.label}}》</view>
+				<view class="right">
+					<view class="btn round margin-right-s"><text class="icon-edit margin-right-xxs"></text>编辑</view>
+
+					<view catchtap="url" data-url="../../../about/index/about_index?key=RULES{{item.id}}&title={{item.titleEn}}" class="btn round margin-right-s"><text class="icon-attention margin-right-xxs"></text>预览</view>
+				</view>
+			</view>
+		</view>
+		<view wx:if="{{list.length==0}}" class="line text-center">暂无可用场地，请先添加场地</view>
+
+	</view>
+	<!-- List END -->
+</view>

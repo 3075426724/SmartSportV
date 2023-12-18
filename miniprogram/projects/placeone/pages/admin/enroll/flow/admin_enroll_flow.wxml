@@ -1,0 +1,86 @@
+<block wx:if="{{isAdmin&&isLoad}}">
+	<cmpt-comm-list  source='admin' type="admin-enroll-pay-flow-list" search="{{search||''}}" _menus="{{sortMenus}}" _items="{{sortItems}}" route="admin/enroll_pay_flow_list" sortMenusDefaultIndex="0" topBottom="50" placeholder="请输入用户手机号码进行查询" bind:list="bindCommListCmpt">
+
+		<view slot="searchEnd"> 
+		</view>
+		<!-- List Begin -->
+		<view class="admin-comm-list">
+			<view wx:if="{{dataList && dataList.total }}" class="load text-grey">共有{{dataList.total}}条符合条件记录</view>
+
+			<view class="item" wx:for="{{dataList.list}}" wx:key="key">
+				<view class="no">{{index+1}}</view>
+				<view class="header" bindtap="bindDetailTap" data-id="{{item._id}}" data-idx="{{index}}">
+					<view class="left">{{item.PAY_BODY}} 
+					</view> 
+				</view>
+
+
+				<view class="info"> 
+					<view class="info-item">
+						<view class="title">状态</view>
+						<view class="mao">：</view>
+						<view wx:if="{{item.PAY_STATUS==0}}" class="content">待支付</view>
+						<view wx:if="{{item.PAY_STATUS==1}}" class="content text-green">已支付</view>
+						<view wx:if="{{item.PAY_STATUS==8}}" class="content text-purple">已退款</view>
+						<view wx:if="{{item.PAY_STATUS==9}}" class="content text-red">失败</view>
+						<view wx:if="{{item.PAY_STATUS==10}}" class="content text-orange">已关闭</view>
+						<view wx:if="{{item.PAY_STATUS==99}}" class="content">无需支付</view>
+					</view>
+					<view class="info-item">
+						<view class="title">发起时间</view>
+						<view class="mao">：</view>
+						<view class="content">{{item.PAY_ADD_TIME}}</view>
+					</view>
+
+					<view class="info-item" bindtap="url" data-type="copy" data-url="{{item.PAY_USER_ID}}">
+						<view class="title">OPENID</view>
+						<view class="mao">：</view>
+						<view class="content">{{item.PAY_USER_ID}}<text class="icon-copy"></text></view>
+					</view>
+				 
+					<view class="info-item" bindtap="url" data-type="copy" data-url="{{item.PAY_TRADE_NO}}">
+						<view class="title">商家订单号</view>
+						<view class="mao">：</view>
+						<view class="content">{{item.PAY_TRADE_NO}}<text class="icon-copy"></text></view>
+					</view>
+
+					<view class="info-item">
+						<view class="title">金额</view>
+						<view class="mao">：</view>
+						<view class="content">  ¥{{item.PAY_TOTAL_FEE/100}} </view>
+					</view> 
+				 
+					<view class="info-item" wx:if="{{item.PAY_STATUS==1||item.PAY_STATUS==8}}">
+						<view class="title">支付时间</view>
+						<view class="mao">：</view>
+						<view class="content">{{item.PAY_END_TIME}}</view>
+					</view>
+
+					<view class="info-item" wx:if="{{item.PAY_STATUS==8}}">
+						<view class="title">退款时间</view>
+						<view class="mao">：</view>
+						<view class="content">{{item.PAY_REFUND_TIME}}</view>
+					</view>
+
+					<view class="info-item" wx:if="{{item.PAY_STATUS==8}}">
+						<view class="title">退款说明</view>
+						<view class="mao">：</view>
+						<view class="content">{{item.PAY_REFUND_DESC}}</view>
+					</view>
+
+				 
+				</view>
+			</view>
+
+		</view>
+		<!-- List END -->
+
+		<!--load begin-->
+		<import src="../../../../../../tpls/public/list_load_tpl.wxml" />
+		<template is="listLoadTpl" data="{{dataList,skin:'text-grey'}}" />
+		<!--load end-->
+
+
+	</cmpt-comm-list>
+
+</block>

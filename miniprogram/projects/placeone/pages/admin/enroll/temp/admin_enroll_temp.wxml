@@ -1,0 +1,34 @@
+<view wx:if="{{isLoad===null}}" class="margin-top load notexist text-l text-grey"></view>
+<view wx:if="{{isLoad===false}}" class="margin-top load loading text-l text-grey"></view>
+
+<block wx:if="{{isAdmin}}">
+	<wxs src="../../../../../../tpls/wxs/tools.wxs" module="tools" />
+	<view class="main-admin">
+		<view class="text-pic-list-box">
+			<view class="item shadow" wx:for="{{temps}}" wx:key="key">
+				<view class="title">
+					<text bindtap="bindSelectTap" data-idx="{{index}}" class="temp-name text-cut">{{item.TEMP_NAME}}</text>
+					<button bindtap="bindSelectTap" data-idx="{{index}}" class="btn mid bg-admin text-white margin-right-s" style="font-weight: normal;">选用</button>
+					<text bindtap="bindOprtTap" data-idx="{{index}}" class="icon-moreandroid more"><text style="font-size: 30rpx;">设置</text></text>
+				</view>
+				<view class="time-list">
+					<view wx:for="{{item.TEMP_TIMES}}" wx-for wx:key="key1" wx:for-item="timesItem" wx:for-index="timesIndex" class="time-item">
+						<view class="detail">
+							<text class="up">{{timesItem.start%2==0?tools.floor(timesItem.start/2)+':00':tools.floor(timesItem.start/2)+':30'}}～{{timesItem.end%2==0?tools.floor(timesItem.end/2)+':29':tools.floor(timesItem.end/2)+':59'}}</text>
+							<text class="text-mgr text-red text-bold">¥{{timesItem.price}}元</text>
+						</view>
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+
+	<cmpt-modal model:show="{{curTimeModalShow}}" type="dialog" title="批量设置价格" bind:click="bindAllLimitSetCmpt" class="modal-form">
+		<view class="modal-desc text-green">统一设置该模板下各时段价格</view>
+
+		<view class="form-group">
+			<view class="title">价格</view>
+			¥<input type="number" maxlength="3" placeholder="请输入价格" model:value="{{curTimePrice}}" class="text-red margin-right-xs"></input>元/半小时
+		</view>
+	</cmpt-modal>
+</block>

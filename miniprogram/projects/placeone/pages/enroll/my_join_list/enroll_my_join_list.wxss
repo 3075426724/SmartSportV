@@ -1,0 +1,65 @@
+@import "../../../../../style/public/article_list.wxss";
+@import "../../../style/skin.wxss";
+
+.text-pic-list-box .item {
+	padding: 30rpx 30rpx 20rpx 40rpx;
+	position: relative;
+	overflow: hidden;
+}
+
+
+.text-pic-list-box .item .cate {
+	z-index: 9999;
+	position: absolute;
+	top: 0;
+	left: 0;
+	font-size: 24rpx;
+	border-bottom-right-radius: 10rpx;
+	background-color: #f2f2f2;
+	padding: 10rpx 20rpx;
+	color: #666;
+}
+
+.text-pic-list-box .item .status {
+	z-index: 9999;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: 24rpx;
+	border-bottom-left-radius: 10rpx;
+	background-color: #f8f8f8;
+	padding: 10rpx 20rpx;
+	color: #666;
+}
+
+
+.btn.mid {
+	padding: 0 30rpx;
+}
+
+.text-pic-list-box .item .author {
+	font-size: 24rpx;
+	color: #777;
+	margin-top: 10rpx;
+}
+
+.text-pic-list-box .item .title {
+	position: relative;
+	padding-right: 20rpx;
+	font-size: 28rpx;
+	margin-bottom: 10rpx;
+}
+
+.text-pic-list-box .item .data {
+	line-height: 1.5;
+	font-size: 26rpx;
+	color: #666;
+	margin-top: 12rpx;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.text-time {
+	color: #ccc;
+}

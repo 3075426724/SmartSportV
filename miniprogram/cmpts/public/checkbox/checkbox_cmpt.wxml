@@ -1,0 +1,15 @@
+<wxs src="../../../tpls/wxs/tools.wxs" module="tools" /> 
+<checkbox-group bindchange="bindChange" class="checkbox-group {{show=='row'?'row':''}}">
+	<view class="item" wx:for="{{sourceData}}" wx:key="key"> 
+		<label wx:if="{{mode=='simple'}}" class="item-label">
+			<checkbox class="item-checkbox" disabled="{{disabled}}" value="{{item}}" checked="{{tools.includes(itemMulti,item)}}" />
+			<text wx:if="{{tools.includes(itemMulti,item)}}" style="font-weight:bold">{{item}}</text>
+			<text wx:else>{{item}}</text>
+		</label>
+		<label wx:elif="{{mode=='multi'}}" class="item-label">
+			<checkbox class="item-checkbox" disabled="{{disabled}}" value="{{item[multiModeValMark]}}" checked="{{tools.includes(itemMulti,item[multiModeValMark])}}" />
+			<text wx:if="{{tools.includes(itemMulti,item[multiModeValMark])}}" style="font-weight:bold">{{item[multiModeLabelMark]}}</text>
+			<text wx:else>{{item[multiModeLabelMark]}}</text>
+		</label>
+	</view>
+</checkbox-group>

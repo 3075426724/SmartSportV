@@ -1,0 +1,59 @@
+<view wx:if="{{isLoad===null}}" class="margin-top load notexist text-l text-grey"></view>
+<view wx:if="{{isLoad===false}}" class="margin-top load loading text-l text-grey"></view>
+
+<view wx:if="{{isLoad && isAdmin}}" class="main-admin">
+	<view class="admin-comm-list">
+		<view class="item">
+			<view class="info">
+				 
+				<view class="info-item">
+					<view class="title">场地</view>
+					<view class="mao">：</view>
+					<view class="content">{{enrollJoin.ENROLL_JOIN_CATE_NAME}} - {{enrollJoin.ENROLL_JOIN_ENROLL_TITLE}}</view>
+				</view>
+				<view class="info-item">
+					<view class="title">时间</view>
+					<view class="mao">：</view>
+					<view class="content">{{enrollJoin.ENROLL_JOIN_DAY}} {{enrollJoin.ENROLL_JOIN_START}} ~ {{enrollJoin.ENROLL_JOIN_END_POINT}}</view>
+				</view>
+				<view class="info-item" wx:if="{{enrollJoin.ENROLL_JOIN_PAY_STATUS!=99}}">
+					<view class="title">支付</view>
+					<view class="mao">：</view>
+					<view class="content">￥{{enrollJoin.ENROLL_JOIN_PAY_FEE}}元</view>
+				</view>
+
+				<view class="info-item">
+					<view class="title">状态</view>
+					<view class="mao">：</view>
+					<view class="content">
+						<text wx:if="{{ enrollJoin.out&&enrollJoin.ENROLL_JOIN_STATUS==1&&enrollJoin.ENROLL_JOIN_IS_CHECKIN==0}}" class="text-grey"><text class="icon-roundcheck  margin-right-xxs"></text>已过期</text>
+
+					<text wx:elif="{{ !enrollJoin.out&&enrollJoin.ENROLL_JOIN_STATUS==1&&enrollJoin.ENROLL_JOIN_IS_CHECKIN==0}}" class="text-green"><text class="icon-roundcheck  margin-right-xxs"></text>可使用，待核销</text>
+
+					<text wx:elif="{{ enrollJoin.ENROLL_JOIN_STATUS==1&&enrollJoin.ENROLL_JOIN_IS_CHECKIN==1}}" class="text-purple"><text class="icon-roundcheck  margin-right-xxs"></text>已核销</text>
+
+
+					<text wx:elif="{{ enrollJoin.ENROLL_JOIN_STATUS==9}}" class="text-grey"><text class="icon-roundclose margin-right-xxs"></text>用户已取消，取消时间 {{enrollJoin.ENROLL_JOIN_CANCEL_TIME}}</text>
+
+					<text wx:elif="{{ enrollJoin.ENROLL_JOIN_STATUS==99}}" class="text-orange"><text class="icon-roundclose margin-right-xxs"></text>系统已取消，取消时间 {{enrollJoin.ENROLL_JOIN_CANCEL_TIME}}</text>
+
+					<text wx:else class="text-grey"><text class="icon-warn margin-right-xxs"></text>状态异常</text>
+					</view>
+				</view> 
+			 
+				<view class="info-item">
+					<view class="title">提交时间</view>
+					<view class="mao">：</view>
+					<view class="content">{{enrollJoin.ENROLL_JOIN_ADD_TIME}} </view>
+				</view>
+			</view>
+		</view>
+	</view>
+	<view style="height:30rpx;"></view>
+
+	<view class="user-info">用户填写信息：</view>
+	<import src="../../../../../../tpls/public/admin_forms_detail_tpl.wxml" />
+	<template is="adminFormsDetailTpl" data="{{forms:enrollJoin.ENROLL_JOIN_FORMS}}" />
+
+
+</view>

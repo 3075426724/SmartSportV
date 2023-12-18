@@ -1,0 +1,135 @@
+<view class="top" bindtap="url" data-url="{{user?'../edit/my_edit':'../reg/my_reg'}}">
+	<image class="bg" mode="aspectFill" src="../../../images/my.png" />
+
+	<view class="left">
+		<image mode="aspectFill" src="../../../images/tabbar/my_cur.png"></image>
+	</view>
+	<view class="right">
+		<view class="name content-cut-one">
+			<text>{{user?user.USER_NAME:'注册 / 登录'}}</text>
+			<text wx:if="{{user&&user.USER_STATUS==9}}" class="tag small radius bg-red margin-left-xs light">已禁用</text>
+			<text wx:elif="{{user&&user.USER_STATUS==0}}" class="tag small radius margin-left-xs light bg-orange">已注册，待审核</text>
+			<text wx:elif="{{user&&user.USER_STATUS==8}}" class="tag small radius margin-left-xs light bg-orange">审核未通过，请修改资料</text>
+		</view>
+		<view class="desc">{{user?'欢迎回来~~~':'马上注册，使用更多功能'}}</view>
+	</view>
+
+</view>
+<view class="main">
+
+
+	<view class="menu">
+		<view class="item" bindtap="url"  data-url="../../enroll/my_join_list/enroll_my_join_list">
+			<view class="title">{{user?user.totalCnt:'0'}}</view>
+			<view class="desc">总预订</view>
+		</view>
+		<view class="item" bindtap="url" data-url="../../enroll/my_join_list/enroll_my_join_list?status=today">
+			<view class="title">{{user?user.todayCnt:'0'}}</view>
+			<view class="desc">今日预订</view>
+		</view>
+		<view class="item" bindtap="url" data-url="../../enroll/my_join_list/enroll_my_join_list?status=run">
+			<view class="title">{{user?user.runCnt:'0'}}</view>
+			<view class="desc">可使用</view>
+		</view>
+	</view>
+
+	<view class="meet-menu shadow-project">
+		<!--<view class="padding-s">我的预订</view>-->
+		<view class="inner">
+			<view class="item" bindtap="url" data-url="../../enroll/my_join_list/enroll_my_join_list?status=run">
+				<view class="img">
+					<image src="../../../images/my/use.png" />
+				</view>
+				<text>可使用</text>
+			</view>
+			<view class="item" bindtap="url" data-url="../../enroll/my_join_list/enroll_my_join_list?status=check">
+				<view class="img">
+					<image src="../../../images/my/check.png" />
+				</view>
+				<text>已核销</text>
+			</view>
+			<view class="item" bindtap="url" data-url="../../enroll/my_join_list/enroll_my_join_list?status=out">
+				<view class="img">
+					<image src="../../../images/my/out.png" />
+				</view>
+				<text>已过期</text>
+			</view>
+			<view class="item" bindtap="url" data-url="../../enroll/my_join_list/enroll_my_join_list?status=cancel">
+				<view class="img">
+					<image src="../../../images/my/cancel.png" />
+				</view>
+				<text>用户取消</text>
+			</view>
+			 
+			<view class="item" bindtap="url" data-url="../../enroll/my_join_list/enroll_my_join_list">
+				<view class="img">
+					<image src="../../../images/my/all.png" />
+				</view>
+				<text>全部预订</text>
+			</view>
+		</view>
+	</view>
+
+
+	<view class="list-menu shadow-project">
+		<view wx:if="{{user&&user.USER_STATUS!=9}}" class="item" bindtap="url" data-url="../edit/my_edit">
+			<view class="title">
+				<image src="../../../images/set/edit.png" />
+				<text>修改我的个人资料</text>
+			</view>
+		</view>
+
+		<view class="item" bindtap="url" data-url="../fav/my_fav">
+			<view class="title">
+				<image src="../../../images/set/favour.png" />
+				<text>我的收藏</text>
+			</view>
+		</view>
+		<view class="item" bindtap="url" data-url="../foot/my_foot">
+			<view class="title">
+				<image src="../../../images/set/his.png" />
+				<text>历史浏览</text>
+			</view>
+		</view>
+
+
+
+
+		<view class="item" wx:if="{{skin.IS_SUB}}" bindtap="bindSetTap">
+			<view class="title">
+				<image src="../../../images/set/set.png" />
+				<text class="text-red text-bold">系统后台管理<text class="text-grey text-normal">（点击试用）</text></text>
+			</view>
+		</view>
+
+		<view class="item" bindtap="url" data-url="../../about/index/about_index?key=SETUP_CONTENT_ABOUT">
+			<view class="title">
+				<image src="../../../images/set/about.png" />
+				<text>关于我们</text>
+			</view>
+		</view>
+
+		<view class="item" wx:if="{{skin.IS_SUB}}" bindtap="url" data-url="/pages/home/about/home_about">
+			<view class="title">
+				<image src="../../../images/set/service.png" />
+				<text class="text-orange">联系作者了解更多详情</text>
+			</view>
+		</view>
+
+		<view class="item" wx:if="{{!skin.IS_SUB}}" bindtap="bindSetTap">
+			<view class="title">
+				<image src="../../../images/set/set.png" />
+				<text>设置</text>
+			</view>
+		</view>
+
+	</view>
+	<view style="height:150rpx"></view>
+
+</view>
+
+
+<block wx:if="{{skin.IS_SUB}}">
+	<import src="../../tpls/menu_tpl.wxml" />
+	<template is="menuTpl" data="{{curMenu:'my_index',returnHome:false}}" />
+</block>

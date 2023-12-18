@@ -1,0 +1,74 @@
+<block wx:if="{{isLoad}}">
+	<cmpt-comm-list _params="{{_params}}" type="my_enroll_join" search="{{search||''}}" _menus="{{sortMenus}}" _items="{{sortItems}}" route="enroll/my_join_list" isTotalMenu="{{true}}" sortMenusDefaultIndex="{{sortMenusDefaultIndex}}" topBottom="120" placeholder="搜索" bind:list="bindCommListCmpt">
+
+		<view slot="searchEnd">
+
+		</view>
+
+		<!-- List Begin -->
+		<view class="text-pic-list-box padding-project">
+
+			<view class="item card-project shadow-project" wx:for="{{dataList.list}}" wx:key="index">
+				<view wx:if="{{!item.out&&item.ENROLL_JOIN_STATUS==1&&item.ENROLL_JOIN_IS_CHECKIN==0}}" class="status bg-green light">可使用，待核销</view>
+
+				<view wx:elif="{{item.ENROLL_JOIN_STATUS==1&&item.ENROLL_JOIN_IS_CHECKIN==1}}" class="status bg-purple light">已核销</view>
+
+				<view wx:elif="{{item.out&&item.ENROLL_JOIN_STATUS==1&&item.ENROLL_JOIN_IS_CHECKIN==0}}" class="status bg-grey light">已过期</view>
+
+				<view wx:elif="{{item.ENROLL_JOIN_STATUS==9}}" class="status bg-grey light">用户已取消</view>
+
+				<view wx:elif="{{item.ENROLL_JOIN_STATUS==99}}" class="status bg-orange light">系统已取消</view>
+				<view wx:else class="status bg-grey">状态异常</view>
+
+				<view class="title content-cut-two">{{item.ENROLL_JOIN_CATE_NAME}} - {{item.ENROLL_JOIN_ENROLL_TITLE}}</view> 
+		 
+
+				<view class="author">
+					时间：<text class="text-cut">{{item.ENROLL_JOIN_DAY}} {{item.ENROLL_JOIN_START}} ~ {{item.ENROLL_JOIN_END_POINT}}</text>
+				</view>
+
+				<view class="author">
+					预订人：<text class="text-cut">{{item.ENROLL_JOIN_OBJ.name}}</text>
+				</view>
+				<view class="author">
+					电话：<text class="text-cut">{{item.ENROLL_JOIN_OBJ.phone}}</text>
+				</view>
+				<view wx:if="{{item.ENROLL_JOIN_STATUS==1&&item.enroll.ENROLL_CANCEL_SET>=0}}" class="author" style="color:#bbb;font-size:24rpx">
+					<text class="icon-info margin-right-xxs"></text>取消规则：<text wx:if="{{item.enroll.ENROLL_CANCEL_SET==0}}">不可取消</text>
+					<text wx:elif="{{item.enroll.ENROLL_CANCEL_SET==1}}">随时可取消，核销后不可取消</text>
+					<text wx:elif="{{item.enroll.ENROLL_CANCEL_SET==2}}">开始前可取消，核销后不可取消</text>
+					<text wx:elif="{{item.enroll.ENROLL_CANCEL_SET==3}}">结束前可取消，核销后不可取消</text>
+					<text wx:elif="{{item.enroll.ENROLL_CANCEL_SET==21}}">提前1天可取消</text>
+					<text wx:elif="{{item.enroll.ENROLL_CANCEL_SET==22}}">提前2天可取消</text>
+
+				</view>
+
+				<view class="data data-button">
+					<button bindtap="url" data-url="../my_join_detail/enroll_my_join_detail?id={{item._id}}" class="btn mid bg-gray text-black"><text wx:if="{{!item.out&&item.ENROLL_JOIN_STATUS==1&&item.ENROLL_JOIN_IS_CHECKIN==0}}" class="icon-qrcode margin-right-xxs"></text>查看详情</button>
+
+
+					<block wx:if="{{(item.ENROLL_JOIN_STATUS==1||item.ENROLL_JOIN_STATUS==0)&&item.ENROLL_JOIN_IS_CHECKIN==0}}">
+						<button wx:if="{{item.enroll.ENROLL_EDIT_SET>0}}" bindtap="url" data-url="../join_edit/enroll_join_edit?id={{item.ENROLL_JOIN_ENROLL_ID}}&enrollJoinId={{item._id}}" data-id="{{item._id}}" class="btn mid bg-gray text-black">修改预订信息</button>
+						<button wx:if="{{item.enroll.ENROLL_CANCEL_SET>0}}" bindtap="bindCancelTap" data-id="{{item._id}}" class="btn mid bg-grey light"><text class="icon-close"></text>取消</button>
+
+					</block>
+				</view>
+
+			</view>
+
+			<!--load begin-->
+			<import src="../../../../../tpls/public/list_load_tpl.wxml" />
+			<template is="listLoadTpl" data="{{skin:'load-project',dataList}}" />
+			<!--load end-->
+
+		</view>
+		<!-- List END -->
+
+	</cmpt-comm-list>
+
+	<!--  button Begin -->
+	<!--  button END -->
+
+</block>
+
+ 

@@ -1,0 +1,7 @@
+@import '../../../../../../style/public/admin.wxss'; 
+.user-info {
+	width: 100%;
+	font-size: 24rpx;
+	padding:10rpx 25rpx;
+	font-weight: bold;
+}

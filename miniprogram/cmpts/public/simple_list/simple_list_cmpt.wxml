@@ -1,0 +1,26 @@
+<block wx:if="{{show=='page'}}">
+<scroll-view class="scroll-view" scroll-y refresher-enabled="true" refresher-triggered="{{refresherTriggered}}" scroll-top='{{topNum}}' bindscroll="bindScrollTop"  bindscrolltolower="bindReachBottom" bindrefresherrefresh='bindPullDownRefresh' style="height: calc(100vh - {{top}}rpx);" >
+    <slot /> 
+    <view wx:if="{{!isLoad || !_dataList || (_dataList && _dataList.page < _dataList.count)}}" class="load text-grey loading"></view>
+    <view wx:if="{{isLoad && _dataList && _dataList.page > 1 && _dataList.page == _dataList.count }}" class="load text-grey over"></view>
+    <view wx:if="{{isLoad && _dataList && _dataList.total == 0}}" class="load text-grey">{{dataNoHint}}</view>
+
+    <view style="height:200rpx;"></view>
+</scroll-view>
+
+<!-- top begin -->
+<button wx:if="{{topShow}}" class="btn-fixed bg-gray text-gray btn-top" bindtap="bindTopTap" style="bottom:{{topBottom}}rpx;margin-bottom: constant(safe-area-inset-bottom);margin-bottom: env(safe-area-inset-bottom);"><text class="icon-top"></text></button>
+<!-- top END. -->
+
+</block>
+
+<block wx:if="{{show=='show'}}">
+	<view class="simple-view">
+		<slot />
+		<view wx:if="{{!isLoad || !_dataList }}" class="load text-grey loading"></view> 
+		<view wx:if="{{isLoad && _dataList && _dataList.total == 0}}" class="load text-grey">{{dataNoHint}}</view>
+
+		<view style="height:200rpx;"></view>
+	</view>
+
+</block>

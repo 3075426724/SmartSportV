@@ -1,0 +1,23 @@
+  
+<block>
+	<view style="width:100%;background-color: #fff; ">
+		<my_date_select cateId="{{cateId}}" title="{{title}}" class="date-fixed" selected="{{day}}" end="{{dateCmtpEndDay}}" bind:select="bindDateSelectCmpt"></my_date_select>
+
+		<view class="day-mask"></view>
+
+		<view class="hint" bindtap="url" data-url="../../about/index/about_index?key=RULES{{cateId}}&title={{titleEn}}"><text class="icon-info margin-right-xxs"></text> 《{{title}}预订须知》</view>
+
+		 
+
+		<view wx:if="{{!isLoad}}" class="margin-top load loading text-l load-project"></view>
+
+		<view wx:elif="{{isLoad&&columns.list.length==0}}" class="no-appt">
+			<text class="icon-emoji" style="font-size: 80rpx;"></text>
+			<text class="text" style="margin-top:10rpx;">本日没有可预订的时段~</text>
+		</view>
+		<my_time_select isAppt="{{true}}" wx:else day="{{day}}" nowUserId="{{nowUserId}}" isPrice="{{true}}"  columnsSource="{{columns}}" bind:select="bindTimeSelectCmpt" used="{{ used }}">
+		</my_time_select>
+	</view>
+
+
+</block> 
