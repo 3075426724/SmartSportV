@@ -1,0 +1,61 @@
+ 
+<view class="form-box shadow"> 
+
+	<view class="form-group">
+		<view class="title must">场地名称</view>
+	</view>
+
+	<view class="form-group">
+		<input placeholder="场地名称" placeholder-class="phc" model:value="{{formTitle}}" focus="{{formTitleFocus}}" maxlength="50"></input>
+	</view>
+	<view wx:if="{{formTitleFocus}}" class="hint-desc error">{{formTitleFocus}}</view>
+ 
+
+	<view class="form-group arrow" id="formCateId">
+		<view class="title must">场地分类</view>
+		<cmpt-picker id="cate-picker" sourceData="{{cateIdOptions}}" bind:select="url" data-type="picker" data-item="formCateId" item="{{formCateId}}"> </cmpt-picker>
+	</view>
+	<view wx:if="{{formCateIdFocus}}" class="hint-desc error">{{formCateIdFocus}}</view>
+
+	<view class="form-group">
+		<view class="title must">排序号<text class="text-grey text-normal margin-left-xs">(小的先显示)</text></view>
+		<input placeholder="排序号，小的先显示" type="number" placeholder-class="phc" model:value="{{formOrder}}" focus="{{formOrderFocus}}" maxlength="4"></input>
+	</view>
+	<view wx:if="{{formOrderFocus}}" class="hint-desc error">{{formOrderFocus}}</view>
+
+</view>
+
+
+<view class="form-box shadow"> 
+
+	<view class="form-group" id="formCancelSet">
+		<view class="title must">取消设置</view>
+		<cmpt-picker mark="cancelSet" style="flex:1" model:item="{{formCancelSet}}" sourceDataStr="0=不可取消,1=随时可取消,2=开始前可取消,3=结束前可取消,21=提前1天可取消,22=提前2天可取消" />
+	</view>
+	<view wx:if="{{formCancelSetFocus}}" class="hint-desc error">{{formCancelSetFocus}}</view>
+
+	<view class="form-group" id="formEditSet">
+		<view class="title must">修改设置<text class="text-grey text-normal margin-left-xs">(填写人修改资料)</text></view>
+		<cmpt-picker mark="editSet" style="flex:1" model:item="{{formEditSet}}" sourceDataStr="0=不可修改,1=随时可修改,2=开始前可修改,3=结束前可修改" />
+	</view>
+	<view wx:if="{{formEditSetFocus}}" class="hint-desc error">{{formEditSetFocus}}</view>
+
+</view>
+
+<view class="form-box shadow margin-top-xs">
+	<cmpt-form-show id="cmpt-form" mark="cmpt-form" source="admin" isCacheMatch="{{false}}" fields="{{fields}}" forms="{{formForms}}" isDefMatch="{{id?false:true}}">
+	</cmpt-form-show>
+</view>
+
+<!--
+<view class="form-box shadow">
+	<view class="form-group">
+		<view class="title must">用户填写资料设置 <text class="text-grey text-normal">(共{{formJoinForms.length}}个字段)</text></view>
+	</view>
+	<cmpt-form-set id="form-set" bind:formset="bindJoinFormsCmpt" fields="{{formJoinForms}}" />
+</view>-->
+
+
+<button bindtap="bindFormSubmit" class="btn-admin margin-top-xs">提交</button>
+
+<view style="height:200rpx"></view>

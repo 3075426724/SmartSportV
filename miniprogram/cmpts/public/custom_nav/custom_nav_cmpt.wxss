@@ -1,0 +1,48 @@
+  .bar {
+	display: flex;
+	position: relative;
+	align-items: center;
+	min-height: 100rpx;
+	justify-content: space-between;
+}
+
+.custom {
+	display: block;
+	position: fixed;
+	width:100%;
+	z-index: 99999;
+}
+
+.custom .title{
+	color:#fff;
+}
+
+.custom .bar {
+	width:100%;
+	min-height: 0px;
+	padding-right: 220rpx;
+	box-shadow: 0rpx 0rpx 0rpx;
+	z-index: 9999;
+}
+
+  .custom .bar .action>.icc {
+  	background-color: rgba(0, 0, 0, .3);
+  	border-radius: 50% !important;
+  	color: #fff;
+  	width: 60rpx;
+  	height: 60rpx;
+  	display: flex;
+  	justify-content: center;
+  	align-items: center;
+  	font-size: 36rpx;
+  }
+
+.custom .bar .content {
+	width: 100%;
+}
+
+
+.custom .bar .content image {
+	height: 60rpx;
+	width: 240rpx;
+}  

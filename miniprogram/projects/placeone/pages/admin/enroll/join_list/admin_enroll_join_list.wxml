@@ -1,0 +1,125 @@
+<view wx:if="{{isLoad===null}}" class="margin-top load notexist text-l text-grey"></view>
+<view wx:if="{{isLoad===false}}" class="margin-top load loading text-l text-grey"></view>
+
+<block wx:if="{{isAdmin&&isLoad}}">
+
+	<cmpt-comm-list pulldownType="{{['modal','list','list','list','list']}}" source='admin' id="cmpt-comm-list" type="admin-enroll-join-list" search="{{search||''}}" _params="{{_params}}" _menus="{{sortMenus}}" _items="{{sortItems}}" route="admin/enroll_join_list" topBottom="50" placeholder="搜索" sortMenusDefaultIndex="0" bind:list="bindCommListCmpt">
+
+		<view slot="searchEnd">
+			<picker mode="date" bindchange="bindDateChange">
+				<view class="picker">
+					<text class="btn radius bg-admin text-white margin-right-s">按日期</text>
+				</view>
+			</picker>
+		</view>
+
+		<!-- List Begin -->
+		<view class="join-list">
+			<view wx:if="{{dataList && dataList.total }}" class="load text-grey">共有{{dataList.total}}条符合条件记录
+				<text wx:if="{{isAllFold}}" bindtap="bindUnFoldAllTap" class="margin-left-xs icon-unfold  text-admin">全部展开</text>
+				<text wx:else bindtap="bindFoldAllTap" class="margin-left-xs icon-fold  text-admin">全部收起</text>
+			</view>
+
+			<view class="item" wx:for="{{dataList.list}}" wx:key="key">
+				<view class="header">
+					<view class="left">
+						<text class="icon-calendar margin-right-xxs"></text><text class="">{{item.ENROLL_JOIN_ADD_TIME}}</text>
+					</view>
+					<view class="right" bindtap="bindCopyTap" data-idx="{{index}}">
+						<text class="icon-copy margin-right-xxs"></text>复制资料
+					</view>
+				</view>
+
+				<view class="info">
+					<view class="info-item">
+						<view class="title">场地</view>
+						<view class="mao">：</view>
+						<view class="content">{{item.ENROLL_JOIN_CATE_NAME}} - {{item.ENROLL_JOIN_ENROLL_TITLE}}</view>
+					</view>
+
+					<view class="info-item">
+						<view class="title text-admin">状态</view>
+						<view class="mao">：</view>
+						<view class="content">
+							<view wx:if="{{item.ENROLL_JOIN_STATUS==9}}" class="text-orange"><text class="icon-close margin-right-xxs"></text>用户取消
+							</view>
+							<view wx:elif="{{(item.ENROLL_JOIN_STATUS==0||item.ENROLL_JOIN_STATUS==1)&&item.ENROLL_JOIN_PAY_STATUS==0}}" class="text-orange"><text class="icon-warn margin-right-xxs"></text>待缴费</view>
+							<view wx:elif="{{item.ENROLL_JOIN_STATUS==1}}" class="text-green"><text class="icon-roundcheck margin-right-xxs"></text>成功<text class="text-{{item.ENROLL_JOIN_IS_CHECKIN==1?'green':'grey'}}">{{item.ENROLL_JOIN_IS_CHECKIN==1?'，已核销':'，未核销'}}</text>
+							</view>
+							<view wx:elif="{{item.ENROLL_JOIN_STATUS==99}}" class="text-red"><text class="icon-roundclose margin-right-xxs"></text>系统取消</view>
+							<view wx:else><text class="icon-warn margin-right-xxs"></text>状态异常</view>
+
+						</view>
+					</view>
+
+					<view class="info-item">
+						<view class="title">费用</view>
+						<view class="mao">：</view>
+						<view class="content">¥{{item.ENROLL_JOIN_PAY_FEE}}元</view>
+					</view>
+
+					<view class="info-item">
+						<view class="title">时段</view>
+						<view class="mao">：</view>
+						<view class="content">{{item.ENROLL_JOIN_DAY}} {{item.ENROLL_JOIN_START}} ~ {{item.ENROLL_JOIN_END_POINT}}</view>
+					</view>
+
+					<view class="info-item" wx:if="{{item.ENROLL_JOIN_STATUS==1&&item.ENROLL_JOIN_PAY_STATUS==1}}">
+						<view class="title ">支付时间</view>
+						<view class="mao">：</view>
+						<view class="content">
+							{{item.ENROLL_JOIN_PAY_TIME}}
+						</view>
+					</view>
+
+					<view class="info-item" wx:if="{{item.ENROLL_JOIN_STATUS==99||item.ENROLL_JOIN_STATUS==9}}">
+						<view class="title ">取消时间</view>
+						<view class="mao">：</view>
+						<view class="content">
+							{{item.ENROLL_JOIN_CANCEL_TIME}}
+						</view>
+					</view>
+
+
+
+					<view class="info-item" wx:for="{{item.ENROLL_JOIN_FORMS}}" wx:key="key1" wx:for-item="form" wx:for-index="formindex" wx:if="{{formindex<3||!item.fold}}">
+						<view class="title">{{form.title}}</view>
+						<view class="mao">：</view>
+						<view wx:if="{{form.type=='mobile'}}" class="content" bindtap="url" data-type="phone" data-url="{{form.val}}">{{form.val}}<text class=" margin-left-xs icon-phone text-black text-normal"></text></view>
+						<view wx:else class="content" bindtap="url" data-type="copy" data-url="{{form.title+'：'+form.val}}">{{form.val}}</view>
+					</view>
+					<view bindtap="bindUnFoldTap" data-idx="{{index}}" wx:if="{{item.fold && item.ENROLL_JOIN_FORMS.length>3}}" class="fold"><text class="icon-unfold margin-right-xs"></text>查看更多资料...</view>
+
+					<view bindtap="bindFoldTap" data-idx="{{index}}" wx:if="{{!item.fold && item.ENROLL_JOIN_FORMS.length>3}}" class="fold"><text class="icon-fold margin-right-xs"></text>收起资料</view>
+
+
+					<view class="oprt" wx:if="{{item.ENROLL_JOIN_STATUS==1}}">
+
+						<block wx:if="{{item.ENROLL_JOIN_STATUS==1&&(item.ENROLL_JOIN_PAY_STATUS==1||item.ENROLL_JOIN_PAY_STATUS==99)}}">
+							<view wx:if="{{item.ENROLL_JOIN_IS_CHECKIN==0}}" bindtap="bindCheckinTap" data-idx="{{index}}" data-flag="1" class="btn bg-purple margin-right-s light">核销</view>
+
+							<view wx:else bindtap="bindCheckinTap" data-idx="{{index}}" data-flag="0" class="btn bg-grey light margin-right-s">取消核销</view>
+						</block>
+
+						<view bindtap="bindCancelTap" data-idx="{{index}}" class="btn bg-orange light margin-right-s"><text class="icon-delete margin-right-xxs"></text>取消</view>
+
+					</view>
+				</view>
+
+				<view class="no">{{index+1}}</view>
+			</view>
+		</view>
+		<!-- List END -->
+
+		<!--load begin-->
+		<import src="../../../../../../tpls/public/list_load_tpl.wxml" />
+		<template is="listLoadTpl" data="{{dataList,skin:'text-grey',noHint:'暂无记录'}}" />
+		<!--load end-->
+
+
+	</cmpt-comm-list>
+
+
+
+
+</block>

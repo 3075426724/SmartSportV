@@ -1,0 +1,57 @@
+@import '../../../../../../style/public/admin.wxss'; 
+
+ page { 
+	background-color: #fff; 
+}
+
+
+
+.main-enroll-detail {
+	width: 100%;
+}
+
+.time-submit .inner.confirm,.date-select .item.cur { 
+	background-color: #2499f2!important; 
+	color:#fff!important;
+}
+
+.hint {
+	width:100%;
+	padding:0 30rpx;
+	font-size: 24rpx;
+	color:var(--orange)
+}
+
+.date-fixed {
+	position: fixed;
+	top: 0;
+	background-color: #fff;
+	width: 100%;
+}
+
+.day-mask {
+	width: 100%;
+	height: 210rpx;
+	background-color: #fff;
+}
+
+.no-appt {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	padding: 10rpx 30rpx;
+	text-align: center;
+	font-size: 30rpx;
+	color: #999;
+	margin-top: 50rpx; 
+}
+
+.time-table .right-list .right-inner .right.used-first {
+	background-color: #cce6ff !important;
+}
+
+.time-table .right-list .right-inner .right.used {
+	border-top: 1rpx solid #cce6ff !important;
+	background-color: #cce6ff !important;
+	color: #1d6bf1 !important;
+}

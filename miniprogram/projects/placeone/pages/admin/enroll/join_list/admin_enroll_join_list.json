@@ -1,0 +1,8 @@
+{
+	"usingComponents": {
+		 
+	},
+	"navigationBarBackgroundColor": "#2499f2",
+	"navigationBarTextStyle": "white",   
+	"navigationBarTitleText": "后台-历史订单管理"
+}

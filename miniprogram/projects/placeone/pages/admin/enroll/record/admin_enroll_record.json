@@ -1,0 +1,10 @@
+{
+	"usingComponents": { 
+		"my_time_select": "../../../../cmpts/my_time_select/my_time_select_cmpt",
+		"date_select": "/cmpts/public/calendar/date_select/date_select_cmpt"
+	},
+	"enablePullDownRefresh": true,
+	"navigationBarBackgroundColor": "#2499f2",
+	"navigationBarTextStyle": "white",
+	"navigationBarTitleText": "订单管理"
+}

@@ -1,0 +1,20 @@
+<view wx:if="{{!isLoad}}" class="margin-top load loading text-l text-grey"></view>
+
+<block wx:if="{{isAdmin&&isLoad}}">
+	<view class="main-admin">
+		<!-- edit form begin -->
+		<view class="form-box shadow"> 
+			<include src="./admin_mgr_form_tpl.wxml" />
+
+			<view class="form-group">
+				<view class="title must">密码</view>
+				<input maxlength="30" type="password" placeholder="请填写密码" model:value="{{formPassword}}" focus="{{formPasswordFocus}}"></input>
+			</view>
+			<view wx:if="{{formPasswordFocus}}" class="hint-desc error">{{formPasswordFocus}}</view>
+
+		</view>
+
+		<button bindtap="bindFormSubmit" class="btn-admin margin-top">确定添加</button>
+
+	</view>
+</block>

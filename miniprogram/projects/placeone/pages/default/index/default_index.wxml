@@ -1,0 +1,58 @@
+<view class="main">
+	<view class="up">
+		<image mode="aspectFill" src="../../../images/home.png" />
+	</view>
+	<view class="down">
+		<view class="menu card-project shadow-project">
+			<view bindtap="url" wx:for="{{cateList}}" wx:key="k" data-url="../../enroll/all/enroll_all?cateId={{item.id}}" class="item">
+				<view class="item-inner">
+					<view class="img shadow">
+						<image src="../../../images/menu/{{item.id}}.png" />
+					</view>
+					<view class="title">{{item.title}}</view>
+				</view>
+			</view>
+
+		</view>
+
+		<!-- List Begin -->
+		<view wx:if="{{!dataList}}" class="margin-top load loading text-l load-project"></view>
+
+		<view wx:else class="home-list-box">
+			<!-- List Begin -->
+			<view class="sub-margin-bottom  comm-list-box">
+				<block wx:for="{{dataList}}" wx:key="key">
+
+
+					<view class="item card-project shadow-project item-leftbig1" bindtap="url" data-url="../../news/detail/news_detail?id={{item._id}}">
+						<image mode="aspectFill" lazy-load="{{true}}" class="leftbig-left loading" src="{{item.NEWS_PIC}}">
+						</image>
+						<view class="leftbig-right">
+							<view class="leftbig-title content-cut-one">{{item.NEWS_TITLE}}</view>
+							<view class="leftbig-desc">
+								<text class="content-cut-two">{{item.NEWS_DESC}} </text>
+							</view>
+							<view class="data">
+								<view class="bottom-tag-list text-cut">
+								</view>
+								<view class="bottom-status">{{item.ext}}</view>
+							</view>
+						</view>
+					</view>
+
+
+
+				</block>
+
+			</view>
+			<!-- List END -->
+
+		</view>
+		<!-- List END -->
+	</view>
+</view>
+
+<block wx:if="{{skin.IS_SUB}}">
+	<import src="../../tpls/menu_tpl.wxml" />
+	<template is="menuTpl" data="{{curMenu:'home_index',returnHome:false}}" />
+</block>

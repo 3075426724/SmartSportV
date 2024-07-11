@@ -1,0 +1,20 @@
+<view wx:if="{{isLoad===null}}" class="margin-top load notexist text-l text-grey"></view>
+<view wx:if="{{isLoad===false}}" class="margin-top load loading text-l text-grey"></view>
+
+<!-- List Begin -->
+<view class="main-admin" wx:if="{{isAdmin&&isLoad}}">
+	<view class="admin-comm-list">
+		<view class="item" wx:for="{{list}}" wx:key="key">
+			<view class="header">
+				<view class="left text-cut">《{{item.label}}》</view>
+				<view class="right"> 
+
+					<view catchtap="url" data-url="../record/admin_enroll_record?cateId={{item.val}}" class="btn round margin-right-s"><text class="icon-form margin-right-xxs"></text>订单管理</view>
+				</view>
+			</view>
+		</view>
+		<view wx:if="{{list.length==0}}" class="line text-center">暂无可用场地，请先添加场地</view>
+
+	</view>
+	<!-- List END -->
+</view>

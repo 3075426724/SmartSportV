@@ -1,0 +1,32 @@
+ <block wx:if="{{isAdmin}}">
+	<view style="width:100%;background-color: #fff; ">
+		<date_select isFresh class="date-fixed" selected="{{day}}" end="{{dateCmtpEndDay}}" bind:select="bindDateSelectCmpt"></date_select>
+	 
+		<view class="day-mask"></view>
+		<view class="hint"><text class="icon-info margin-right-xxs"></text>点击表格可查看预订详细，取消预订，或者核销</view>
+		<view  wx:if="{{!isLoad}}" class="margin-top load loading text-l load-project"></view>
+
+		<view wx:elif="{{isLoad&&columns.list.length==0}}" class="no-appt"> 
+			<text class="icon-emoji" style="font-size: 80rpx;"></text>
+			<text class="text" style="margin-top:10rpx;">本日没有可预订的时段~</text>
+		</view>  
+		<my_time_select wx:else day="{{day}}" isAdmin="{{true}}" showDetail="detail" columnsSource="{{columns}}" bind:cancel="bindCancelCmpt" bind:checkin="bindCheckinCmpt" bind:select="bindTimeSelectCmpt" used="{{ used }}">
+		</my_time_select>
+	</view>
+  
+	<cmpt-modal wx:if="{{apptModalShow}}" model:show="{{apptModalShow}}" type="dialog" title="代客户预订" bind:click="bindApptCmpt" class="modal-form" cancelText="返回" confirmText="提交预订">
+		 
+		<view class="form-group" style="padding:0 10rpx">
+			<view class="left">预订时间 ：</view> 
+			<view class="right">{{apptTimeDesc}}</view>
+		</view>
+		<view class="form-group" style="padding:0 10rpx">
+			<view class="left">客户手机 ：</view> 
+			<view class="right"><input maxlength="11" type="number" model:value="{{formApptMobile}}" placeholder-class="phc" placeholder="请输入客户手机" /></view>
+		</view>
+	 
+	 
+	</cmpt-modal> 
+
+</block>
+ 

@@ -1,0 +1,73 @@
+<view wx:if="{{isLoad===null}}" class="margin-top load notexist text-l load-project"></view>
+<view wx:if="{{isLoad===false}}" class="margin-top load loading text-l load-project"></view>
+
+<block wx:if="{{isLoad}}">
+	<view class="main padding-project">
+		<view class="text-pic-list-box margin-top-xs">
+			<view class="item card-project shadow-project">
+				<view class="title-line">
+					<view class="title content-cut-two" style="font-size: 28rpx;">{{enrollJoin.ENROLL_JOIN_CATE_NAME}} - {{enrollJoin.ENROLL_JOIN_ENROLL_TITLE}} </view>
+				</view> 
+
+			 
+				<view class="data">
+					<text class="icon-time margin-right-xs"></text>{{enrollJoin.ENROLL_JOIN_DAY}} {{enrollJoin.ENROLL_JOIN_START}} ~ {{enrollJoin.ENROLL_JOIN_END_POINT}}
+				</view>
+
+				<view class="data" wx:if="{{enrollJoin.ENROLL_JOIN_PAY_STATUS!=99}}">
+					<text class="icon-moneybag margin-right-xs"></text>支付：￥{{enrollJoin.ENROLL_JOIN_PAY_FEE}}元
+				</view> 
+
+				<image wx:if="{{enrollJoin.out&&enrollJoin.ENROLL_JOIN_STATUS==1&&enrollJoin.ENROLL_JOIN_IS_CHECKIN==0}}" class="status" mode="aspectFill" src="../../../images/status/out.png" />
+				<image wx:elif="{{!enrollJoin.out&&enrollJoin.ENROLL_JOIN_STATUS==1&&enrollJoin.ENROLL_JOIN_IS_CHECKIN==0}}"  class="status" mode="aspectFill" src="../../../images/status/wait.png" />
+				<image wx:elif="{{enrollJoin.ENROLL_JOIN_STATUS==1&&enrollJoin.ENROLL_JOIN_IS_CHECKIN==1}}"  class="status" mode="aspectFill" src="../../../images/status/check.png" />
+				<image wx:elif="{{enrollJoin.ENROLL_JOIN_STATUS==9||enrollJoin.ENROLL_JOIN_STATUS==99}}"  class="status" mode="aspectFill" src="../../../images/status/cancel.png" />
+
+				<view class="data">
+					<text wx:if="{{enrollJoin.out&&enrollJoin.ENROLL_JOIN_STATUS==1&&enrollJoin.ENROLL_JOIN_IS_CHECKIN==0}}" class="text-grey"><text class="icon-roundcheck  margin-right-xxs"></text>已过期</text>
+
+					<text wx:elif="{{!enrollJoin.out&&enrollJoin.ENROLL_JOIN_STATUS==1&&enrollJoin.ENROLL_JOIN_IS_CHECKIN==0}}" class="text-green"><text class="icon-roundcheck  margin-right-xxs"></text>可使用，待核销</text>
+
+					<text wx:elif="{{enrollJoin.ENROLL_JOIN_STATUS==1&&enrollJoin.ENROLL_JOIN_IS_CHECKIN==1}}" class="text-purple"><text class="icon-roundcheck  margin-right-xxs"></text>已核销</text>
+
+
+					<text wx:elif="{{enrollJoin.ENROLL_JOIN_STATUS==9}}" class="text-grey"><text class="icon-roundclose margin-right-xxs"></text>用户已取消，取消时间 {{enrollJoin.ENROLL_JOIN_CANCEL_TIME}}</text>
+
+					<text wx:elif="{{enrollJoin.ENROLL_JOIN_STATUS==99}}" class="text-orange"><text class="icon-roundclose margin-right-xxs"></text>系统已取消，取消时间 {{enrollJoin.ENROLL_JOIN_CANCEL_TIME}}</text>
+
+					<text wx:else class="text-grey"><text class="icon-warn margin-right-xxs"></text>状态异常</text>
+
+				</view>
+
+			</view>
+
+		</view>
+
+		<view class="info-list-box" wx:if="{{enrollJoin.ENROLL_JOIN_STATUS==1&&enrollJoin.ENROLL_JOIN_IS_CHECKIN==0}}">
+			<view class="item card-project shadow-project">
+				<view class="info">
+					<view class="center"><text class="text-bold margin-right-s">预订码</text> (向工作人员出示进行核销)</view>
+				</view>
+				<view class="info">
+					<view class="center">
+						<image show-menu-by-longpress="{{true}}" src="{{qrImageData}}" class="loading" />
+					</view>
+				</view>
+			</view>
+		</view>
+
+		<view class="info-list-box margin-bottom-xxl">
+			<view class="item card-project shadow-project">
+
+				<view class="info" wx:for="{{enrollJoin.ENROLL_JOIN_FORMS}}" wx:key="key">
+					<view class="title">{{item.title}}：</view>
+					<view class="content">{{item.val}}</view>
+				</view>
+
+				<view class="info text-grey margin-top-xs text-s">创建时间：{{enrollJoin.ENROLL_JOIN_ADD_TIME}}</view>
+				<view wx:if="{{enrollJoin.ENROLL_JOIN_LAST_TIME!='1970-01-01 08:00:00' && enrollJoin.ENROLL_JOIN_LAST_TIME!='1970-01-01 00:00:00'}}" class="info text-grey margin-top-xs text-s">最近修改：{{enrollJoin.ENROLL_JOIN_LAST_TIME}}</view>
+				<view wx:if="{{enrollJoin.ENROLL_JOIN_STATUS==1&&enrollJoin.ENROLL_JOIN_IS_CHECKIN==1}}" class="info text-grey margin-top-xs text-s">核销时间：{{enrollJoin.ENROLL_JOIN_CHECKIN_TIME}}</view>
+			</view>
+		</view>
+	</view>
+</block>

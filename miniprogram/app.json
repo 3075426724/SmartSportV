@@ -1,0 +1,99 @@
+{
+	"pages": [
+		"projects/placeone/pages/default/index/default_index",
+		"projects/placeone/pages/about/list/about_list",
+		"projects/placeone/pages/about/index/about_index",
+		"projects/placeone/pages/search/search",
+		"projects/placeone/pages/my/index/my_index",
+		"projects/placeone/pages/my/reg/my_reg",
+		"projects/placeone/pages/my/edit/my_edit",
+		"projects/placeone/pages/my/foot/my_foot",
+		"projects/placeone/pages/my/fav/my_fav",
+		"projects/placeone/pages/news/index/news_index",
+		"projects/placeone/pages/news/detail/news_detail",
+		"projects/placeone/pages/news/cate1/news_cate1",
+		"projects/placeone/pages/news/cate2/news_cate2",
+		"projects/placeone/pages/admin/news/list/admin_news_list",
+		"projects/placeone/pages/admin/news/add/admin_news_add",
+		"projects/placeone/pages/admin/news/edit/admin_news_edit",
+		"projects/placeone/pages/admin/setup/about/admin_setup_about",
+		"projects/placeone/pages/admin/setup/about_list/admin_setup_about_list",
+		"projects/placeone/pages/admin/setup/qr/admin_setup_qr",
+		"projects/placeone/pages/admin/index/home/admin_home",
+		"projects/placeone/pages/admin/index/login/admin_login",
+		"projects/placeone/pages/admin/content/admin_content",
+		"projects/placeone/pages/admin/mgr/log/admin_log_list",
+		"projects/placeone/pages/admin/mgr/edit/admin_mgr_edit",
+		"projects/placeone/pages/admin/mgr/list/admin_mgr_list",
+		"projects/placeone/pages/admin/mgr/add/admin_mgr_add",
+		"projects/placeone/pages/admin/mgr/pwd/admin_mgr_pwd",
+		"projects/placeone/pages/admin/user/list/admin_user_list",
+		"projects/placeone/pages/admin/user/detail/admin_user_detail",
+		"projects/placeone/pages/admin/user/export/admin_user_export",
+		"projects/placeone/pages/enroll/all/enroll_all",
+		"projects/placeone/pages/enroll/join/enroll_join",
+		"projects/placeone/pages/enroll/my_join_list/enroll_my_join_list",
+		"projects/placeone/pages/enroll/my_join_detail/enroll_my_join_detail",
+		"projects/placeone/pages/enroll/join_edit/enroll_join_edit",
+		"projects/placeone/pages/admin/enroll/list/admin_enroll_list",
+		"projects/placeone/pages/admin/enroll/add/admin_enroll_add",
+		"projects/placeone/pages/admin/enroll/edit/admin_enroll_edit",
+		"projects/placeone/pages/admin/enroll/join_list/admin_enroll_join_list",
+		"projects/placeone/pages/admin/enroll/export/admin_enroll_export",
+		"projects/placeone/pages/admin/enroll/temp/admin_enroll_temp",
+		"projects/placeone/pages/admin/enroll/day/admin_enroll_day",
+		"projects/placeone/pages/admin/enroll/record/admin_enroll_record",
+		"projects/placeone/pages/admin/enroll/scan/admin_enroll_scan",
+		"projects/placeone/pages/admin/enroll/flow/admin_enroll_flow",
+		"projects/placeone/pages/admin/enroll/notice/admin_enroll_notice",
+		"projects/placeone/pages/admin/enroll/data/admin_enroll_data",
+		"projects/placeone/pages/admin/enroll/join_detail/admin_enroll_join_detail",
+		"cmpts/public/form/form_set/field/form_set_field",
+		"cmpts/public/form/form_show/content/form_show_content",
+		"pages/test1/test1"
+	],
+	"window": {
+		"backgroundColor": "#f1f1f1",
+		"backgroundTextStyle": "dark",
+		"navigationBarBackgroundColor": "#FED202",
+		"navigationBarTitleText": "体育场馆预订与支付小程序",
+		"navigationBarTextStyle": "black"
+	},
+	"tabBar": {
+		"custom": false,
+		"backgroundColor": "#ffffff",
+		"color": "#999999",
+		"selectedColor": "#000000",
+		"list": [
+			{
+				"pagePath": "projects/placeone/pages/default/index/default_index",
+				"text": "场地",
+				"iconPath": "/projects/placeone/images/tabbar/home.png",
+				"selectedIconPath": "/projects/placeone/images/tabbar/home_cur.png"
+			},
+			{
+				"pagePath": "projects/placeone/pages/news/index/news_index",
+				"text": "通知公告",
+				"iconPath": "/projects/placeone/images/tabbar/news.png",
+				"selectedIconPath": "/projects/placeone/images/tabbar/news_cur.png"
+			}, 
+			{
+				"pagePath": "projects/placeone/pages/my/index/my_index",
+				"text": "我的",
+				"iconPath": "/projects/placeone/images/tabbar/my.png",
+				"selectedIconPath": "/projects/placeone/images/tabbar/my_cur.png"
+			}
+		]
+	},
+	"permission": {
+		"scope.userLocation": {
+			"desc": "获取你当前位置信息用于小程序位置接口的效果展示"
+		}
+	},
+	"usingComponents": {
+		"cmpt-comm-list": "/cmpts/public/list/comm_list_cmpt",
+		"cmpt-picker": "/cmpts/public/picker/picker_cmpt",
+		"cmpt-modal": "/cmpts/public/modal/modal_cmpt"
+	},
+	"sitemapLocation": "sitemap.json"
+}
